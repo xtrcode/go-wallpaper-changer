@@ -2,5 +2,5 @@
 
 Usage:
 ```go
-change-wp -path="/home/username/Pictures" -duratin=30
+change-wp -path="/home/username/Pictures" -duration=30
 ```
