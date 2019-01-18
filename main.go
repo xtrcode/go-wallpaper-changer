@@ -72,6 +72,9 @@ func main() {
 			_ = cmd.Run()
 			time.Sleep(time.Second * time.Duration(*duration))
 		}
+
+		// reindex
+		files = indexWallpapers(*path)
 	}
 
 }
