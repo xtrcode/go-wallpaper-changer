@@ -68,8 +68,23 @@ func main() {
 
 	for {
 		for _, wp := range files {
+			// check if file still exists
+			if _, err := os.Stat(wp); err != nil || os.IsNotExist(err) {
+				// file doesn't exists anymore => reindex!
+				break
+			}
+
+			fmt.Println("Change wallpaper/screensaver to: ", wp)
+
+			// change wallpaper
 			cmd := exec.Command("gsettings", "set", "org.gnome.desktop.background", "picture-uri", "file://"+wp)
 			_ = cmd.Run()
+
+			// change screensaver/lock screen image
+			cmd = exec.Command("gsettings", "set", "org.gnome.desktop.screensaver", "picture-uri", "file://"+wp)
+			_ = cmd.Run()
+
+			// sleep
 			time.Sleep(time.Second * time.Duration(*duration))
 		}
 
