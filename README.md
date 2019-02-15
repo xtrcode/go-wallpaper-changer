@@ -1,4 +1,4 @@
-# Hacky Gnome Wallpaper changer
+# Hacky Gnome Wallpaper/Screen Saver changer
 
 Usage:
 ```go
