@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -37,10 +38,17 @@ func indexWallpapers(path string) ([]string) {
 		panic(err)
 	}
 
+	for i := range files {
+		j := rand.Intn(i + 1)
+		files[i], files[j] = files[j], files[i]
+	}
+
 	return files
 }
 
 func main() {
+	rand.Seed(time.Now().Unix())
+
 	path := flag.String("path", ".", "absolute path to the wallpapers")
 	duration := flag.Int("duration", 30, "duration for each wallpaper to be shown in seconds")
 
@@ -67,6 +75,7 @@ func main() {
 	}
 
 	for {
+
 		for _, wp := range files {
 			// check if file still exists
 			if _, err := os.Stat(wp); err != nil || os.IsNotExist(err) {
